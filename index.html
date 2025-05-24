@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shredder Generator</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-start: #f0f4f8;
+      --bg-end: #d9e2ec;
+      --primary: #1a73e8;
+      --accent: #4285f4;
+      --text: #202124;
+      --muted: #5f6368;
+      --card-bg: #ffffff;
+      --radius: 8px;
+      --shadow: rgba(60, 64, 67, 0.15);
+      --gap: 20px;
+      --transition: 0.2s;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--gap);
+    }
+    .generator {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      width: 720px;
+      max-width: 100%;
+      padding: calc(var(--gap) * 1.5);
+      box-shadow: 0 1px 4px var(--shadow), 0 2px 8px var(--shadow);
+    }
+    h1 {
+      margin-bottom: var(--gap);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-align: center;
+    }
+    .btn-spin {
+      display: block;
+      padding: 12px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition), box-shadow var(--transition);
+      margin: 0 auto var(--gap);
+    }
+    .btn-spin:hover {
+      background: var(--accent);
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+    .result {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--gap);
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .result::-webkit-scrollbar { width: 6px; }
+    .result::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+    .category {
+  background: var(--card-bg);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center; /* Changed from flex-start to center */
+  flex-wrap: wrap;
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+}
+    .category:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px var(--shadow);
+      z-index: 1;
+    }
+    .category strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .category span {
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: auto;
+      text-align: right;
+      flex: 1 1 auto;
+      font-size: 0.8rem;
+    }
+    .placeholder {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+      padding: var(--gap) 0;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: var(--gap) 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="generator">
+      <h1>Shredder Generator</h1>
+      <button class="btn-spin" onclick="generateShredder()">Generate Build</button>
+      <div class="result" id="result">
+        <div class="placeholder">Click “Generate Build” to reveal your shredder!</div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const components = {
+      "Variant": ["Ball Joint","OG","Omni","Gyro","Tank","Make your own!","Mini"],
+      "Movement": ["Propeller Engines","Hover Engines","Rocket Engines","Conveyor Engines","Magnet Engines"],
+      "Weaponry": ["Guns and Rockets","Lava Spitters","Fireworks","TNT"],
+      "Extra Armor": ["More TNT","Basic Armor (Ladders, 1x7s)","Cutter Armor"],
+      "Special Abilities": ["Rocket Blade","ROD","Void Tech (If Possible)","Super Speed","Skybounce","Just REALLY big","Detachable Swarm","Shredder Army"],
+      "Blade Design": ["AGB-CS","Make an Orignal One","1x1","Massive","Dialated AGB-CS","Ladder-TNT (jannu?)"]
+    };
+    function getRandomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function generateShredder() {
+      const result = document.getElementById('result');
+      result.innerHTML = '';
+      Object.entries(components).forEach(([cat, opts]) => {
+        const box = document.createElement('div');
+        box.className = 'category';
+        box.innerHTML = `<strong>${cat}:</strong><span>${getRandomItem(opts)}</span>`;
+        result.appendChild(box);
+      });
+    }
+  </script>
+  <div class="footer">I love chatgpt ❤</div>
+</body>
+</html>
