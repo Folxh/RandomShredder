@@ -1,5 +1,6 @@
 I sometimes run out of ideas for shredders and just wanted a fun way to make new ideas for them. Now, you can too! By making the responses to each part of a shredder random, you can make a orignal shredder with no effort! Its like magic!
 <br>
+Visit at https://folxh.github.io/RandomShredder/ 
 <br>
 Example:
 <br>
